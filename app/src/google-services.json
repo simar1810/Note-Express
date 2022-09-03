@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "485001756422",
+    "project_id": "simarpreet-1295e",
+    "storage_bucket": "simarpreet-1295e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485001756422:android:232f635c32347acf4ea887",
+        "android_client_info": {
+          "package_name": "com.updevelop.noteexpress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485001756422-ucq1m6apab0attio9im5eqhc88g65619.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY5sbuVsC0BvuNAdYqZw6MKToUjG2zJhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485001756422-ucq1m6apab0attio9im5eqhc88g65619.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

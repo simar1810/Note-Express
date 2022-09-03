@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- login_page strings -->
+
+	<string name="app_name">Page 1</string>
+	<string name="ek_img_content">ExportKit Image</string>
+	<string name="don_t_have_an_account__sign_up_string">Dont have an account? Sign Up</string>
+	<string name="forgot_password__string">Forgot Password?</string>
+	<string name="login_string">Login</string>
+	<string name="login_ek1_string">Login</string>
+	<string name="password_string">PASSWORD</string>
+	<string name="username_string">USERNAME</string>
+</resources>
