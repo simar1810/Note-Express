@@ -41,23 +41,29 @@ public class loginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
-        VideoView videoview = (VideoView) findViewById(R.id.videoview);
-        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.anime_login);
-        videoview.setVideoURI(uri);
-        videoview.start();
+//        VideoView videoview = (VideoView) findViewById(R.id.videoview);
+//        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.anime_login);
+//        videoview.setVideoURI(uri);
+//        videoview.start();
         FirebaseAuth.getInstance();
         if (FirebaseAuth.getInstance().getCurrentUser()!= null){
             startActivity(new Intent(loginPage.this, homePage.class));
 
         }
-        userName = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        loginBtn = findViewById(R.id.login_btn);
-        signUp = findViewById(R.id.signUP);
+        userName = findViewById(R.id.inputUsername);
+        password = findViewById(R.id.inputPassword);
+        loginBtn = findViewById(R.id.btnLogin);
+        signUp = findViewById(R.id.gotoRegister);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkData();
+            }
+        });
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(loginPage.this,register.class));
             }
         });
 
@@ -90,11 +96,12 @@ public class loginPage extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     Map<String,Object> checkData = task.getResult().getData();
-                    assert checkData != null;
-                    String usernameCheckData = String.valueOf(checkData.get("username"));
+                    String usernameCheckData = String.valueOf(checkData.get("usernamelist"));
                     String passwordCheckData = String.valueOf(checkData.get("password"));
                     if (usernameCheckData.equals(userName) && passwordCheckData.equals(password)){
-                        startActivity(new Intent(loginPage.this, homePage.class));
+                        Intent intent = new Intent(loginPage.this, homePage.class);
+                        intent.putExtra("username" , userName);
+                        startActivity(intent);
                     }
                     else{
                         Toast.makeText(loginPage.this, "Invalid Username / Password", Toast.LENGTH_SHORT).show();

@@ -3,11 +3,13 @@ package com.updevelop.noteexpress;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +29,7 @@ public class register extends AppCompatActivity {
     EditText password;
     EditText confirmPassword;
     Button signUp;
+    TextView gotoLogin;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
 
@@ -34,11 +37,19 @@ public class register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        username = findViewById(R.id.);
-        studentID = findViewById(R.id.);
-        password = findViewById(R.id.);
-        confirmPassword = findViewById(R.id.);
-        signUp = findViewById(R.id.);
+        username = findViewById(R.id.inputUsername);
+        studentID = findViewById(R.id.studentID);
+        password = findViewById(R.id.inputPassword);
+        confirmPassword = findViewById(R.id.confirm_password);
+        signUp = findViewById(R.id.btnSignUp);
+        gotoLogin = findViewById(R.id.gotoLogin);
+        gotoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(register.this,loginPage.class));
+            }
+        });
+
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +75,7 @@ public class register extends AppCompatActivity {
             confirmPassword.setError("Empty Password !! ");
             Toast.makeText(this, "Please Confirm Your Password ! ", Toast.LENGTH_SHORT).show();
         }
-        if (!password.equals(confirmPassword)){
+        if (!password.getText().toString().equals(confirmPassword.getText().toString())){
             Toast.makeText(this, "Password Doesn't Matches With Confirm Password", Toast.LENGTH_SHORT).show();
             confirmPassword.setError("?");
             password.setError("?");
@@ -85,7 +96,7 @@ public class register extends AppCompatActivity {
     public void storeDataBase(String username ,String password , String studentID){
         this.db = FirebaseFirestore.getInstance();
         Map<String,Object> loginDeatils = new HashMap<>();
-        loginDeatils.put("usernameList", username);
+        loginDeatils.put("usernamelist", username);
         loginDeatils.put("password",password);
         loginDeatils.put("studentID",studentID);
 
@@ -108,6 +119,7 @@ public class register extends AppCompatActivity {
         return TextUtils.isEmpty(str);
     }
     private void setAuthData(String username , String password){
+        this.mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
